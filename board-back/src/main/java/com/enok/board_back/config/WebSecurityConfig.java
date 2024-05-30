@@ -54,8 +54,8 @@ class FailedAuthenticationEntryPoint implements AuthenticationEntryPoint{
       throws IOException, ServletException {
 
         response.setContentType("application/json");
-        response.setStatus(HttpServletResponse.SC_FORBIDDEN);
-        response.getWriter().write("{\"code\":\"NP\", \"message\": \"DO Not Have permisseion\"}");
+        response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+        response.getWriter().write("{\"code\":\"AF\", \"message\": \"Authorization Failed\"}");
     
   }
   
