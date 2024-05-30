@@ -14,6 +14,7 @@ import io.jsonwebtoken.SignatureAlgorithm;
 public class JwtProvider {
   private String secretKey = "S3cr3tK3y";
 
+  //
   public String create(String email){
     Date expiredDate = Date.from(Instant.now().plus(1, ChronoUnit.HOURS));
 
