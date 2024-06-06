@@ -12,4 +12,6 @@ public interface UserRepository extends JpaRepository<UserEntity, String>{
   boolean existsByNickname(String nickname); // 메서드 이름 수정
   boolean existsByTelNumber(String telNumber); // 메서드 이름 수정
   
+  UserEntity findByEmail(String email);
+
 }

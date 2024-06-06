@@ -3,7 +3,9 @@ package com.enok.board_back.controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.enok.board_back.dto.request.auth.SignInRepuestDto;
 import com.enok.board_back.dto.request.auth.SignUpRequestDto;
+import com.enok.board_back.dto.response.auth.SignInResponseDto;
 import com.enok.board_back.dto.response.auth.SignUpResponseDto;
 import com.enok.board_back.service.AuthService;
 
@@ -29,4 +31,11 @@ public class AuthController {
     return response;
 
   }//signUp
+
+  @PostMapping("/sign-in")
+  public ResponseEntity<? super SignInResponseDto> signIn(@RequestBody @Valid SignInRepuestDto requestBody){
+    ResponseEntity<? super SignInResponseDto> response = authService.signIn(requestBody);
+    return response;
+  }//signIn
+
 }//class
