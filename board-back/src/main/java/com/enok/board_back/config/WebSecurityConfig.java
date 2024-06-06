@@ -3,6 +3,8 @@ package com.enok.board_back.config;
 import java.io.IOException;
 
 import org.springframework.context.annotation.Bean;
+
+import static org.springframework.security.config.Customizer.withDefaults;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -27,18 +29,19 @@ public class WebSecurityConfig {
 
   private final JwtAuthenticationFilter jwtAuthenticationFilter;
 
+  @SuppressWarnings("removal")
   @Bean
   public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
       httpSecurity
-      .cors().and()
-      .csrf().disable()
-      .httpBasic().disable()
-      .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
-      .authorizeHttpRequests()
-      .requestMatchers("/", "/api/v1/auth/**", "/api/v1/search/**", "/file/**").permitAll()
-      .requestMatchers(HttpMethod.GET, "/api/v1/board/**", "/api/v1/user/*" ).permitAll()
-      .anyRequest().authenticated().and()
-      .exceptionHandling().authenticationEntryPoint(new FailedAuthenticationEntryPoint());
+              .cors(withDefaults())
+              .csrf(csrf -> csrf.disable())
+              .httpBasic(basic -> basic.disable())
+              .sessionManagement(management -> management.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+              .authorizeHttpRequests(requests -> requests
+                      .requestMatchers("/", "/api/v1/auth/**", "/api/v1/search/**", "/file/**").permitAll()
+                      .requestMatchers(HttpMethod.GET, "/api/v1/board/**", "/api/v1/user/*").permitAll()
+                      .anyRequest().authenticated())
+              .exceptionHandling(handling -> handling.authenticationEntryPoint(new FailedAuthenticationEntryPoint()));
 
       httpSecurity.addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
 

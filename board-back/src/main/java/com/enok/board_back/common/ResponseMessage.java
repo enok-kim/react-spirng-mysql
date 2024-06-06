@@ -1,6 +1,7 @@
 package com.enok.board_back.common;
 
 public interface ResponseMessage {
+  
   public static final String SUCCESS = "Success.";
 
   //검증 실패

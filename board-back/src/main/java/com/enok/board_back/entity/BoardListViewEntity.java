@@ -18,11 +18,12 @@ public class BoardListViewEntity {
   private String title;
   private String content;
   private String titleImage;
-  private int viewCount;
   private int favoriteCount;
   private int commentCount;
+  private int viewCount;
   private String writeDatetime;
   private String writerEmail;
   private String writerNickname;
-  private String writerProfileImage;
+  private String writerProfileimage;
+  
 }

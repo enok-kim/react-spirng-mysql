@@ -25,7 +25,7 @@ public class SignUpRequestDto {
   @NotBlank
   private String nickname;
 
-  @NotBlank @Pattern(regexp = "^[0-9]{11-13}$") // 0부터 9까지의 숫자로 11-13자리의 숫자
+  @NotBlank @Pattern(regexp = "^[0-9]{8,20}$") // 0부터 9까지의 숫자로 8-20자리의 숫자
   private String telNumber;
 
   @NotBlank
